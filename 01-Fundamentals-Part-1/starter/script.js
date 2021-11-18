@@ -16,3 +16,30 @@ if(markHigherBMI) {
 } else {  
   console.log(`John's BMI ${johnsBMI} is higher than Mark's ${marksBMI}`)
 }
+
+// CHALLENGE 3
+const scoreDolphins1 = 97;
+const scoreDolphins2 = 112;
+const scoreDolphins3 = 101;
+const scoreKoalas1 = 109;
+const scoreKoalas2 = 95;
+const scoreKoalas3 = 106;
+const averageDolphins = (scoreDolphins1 + scoreDolphins2 + scoreDolphins3)/3;
+const averageKoalas = (scoreKoalas1 + scoreKoalas2 + scoreKoalas3)/3;
+if(averageDolphins>averageKoalas && (scoreDolphins3>100 || scoreDolphins2>100 || scoreDolphins1>100) ) {
+  console.log(`Dolphins Win.`);
+} else if(averageKoalas>averageDolphins && (scoreKoalas3>100 || scoreKoalas2>100 || scoreKoalas1>100)){
+  console.log(`Koalas Win.`);
+} else if((averageKoalas===averageDolphins) && (scoreDolphins3>100 || scoreDolphins2>100 || scoreDolphins1>100) && (scoreKoalas3>100 || scoreKoalas2>100 || scoreKoalas1>100)) {
+  console.log(`it's a tie`);
+}
+else {
+  console.log(`No one Win.`);
+
+}
+
+// CHALLENGE 4
+let tip;
+const bill = 40;
+tip = (bill>=50 && bill<= 300) ? 0.15 * bill : 0.2 * bill;
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${tip + bill}`); 
