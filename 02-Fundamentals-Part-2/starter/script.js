@@ -92,26 +92,52 @@
 // console.log(aPerson.getName());
 // console.log(aPerson.getName2);
 
-const mark = {
-  fullName : `Mark Miller`,
-  mass: 78,
-  height: 1.69,
-  calcBMI: function(){return this.mass / this.height ** 2;},
-}
-const john = {
-  fullName : `Torin Zhou`,
-  mass : 92,
-  height: 1.95,
-  calcBMI: function(){return this.mass / this.height ** 2;},
-}
+// const mark = {
+//   fullName : `Mark Miller`,
+//   mass: 78,
+//   height: 1.69,
+//   calcBMI: function(){return this.mass / this.height ** 2;},
+// }
+// const john = {
+//   fullName : `Torin Zhou`,
+//   mass : 92,
+//   height: 1.95,
+//   calcBMI: function(){return this.mass / this.height ** 2;},
+// }
 
-console.log(mark.calcBMI());
-const compareBMI = function(name1,name2){
-  const message = (name1.calcBMI() > name2.calcBMI()) ? 
-  `${name1.fullName}'s BMI (${name1.calcBMI()}) is higher than ${name2.fullName}'s (${name2.calcBMI()})`:
-  (name2.calcBMI() > name1.calcBMI()) ? 
-  `${name2.fullName}'s BMI (${name2.calcBMI()}) is higher than ${name1.fullName}'s (${name1.calcBMI()})`:
-  `They have the same BMI`;
-  return console.log(message);
+// console.log(mark.calcBMI());
+// const compareBMI = function(name1,name2){
+//   const message = (name1.calcBMI() > name2.calcBMI()) ? 
+//   `${name1.fullName}'s BMI (${name1.calcBMI()}) is higher than ${name2.fullName}'s (${name2.calcBMI()})`:
+//   (name2.calcBMI() > name1.calcBMI()) ? 
+//   `${name2.fullName}'s BMI (${name2.calcBMI()}) is higher than ${name1.fullName}'s (${name1.calcBMI()})`:
+//   `They have the same BMI`;
+//   return console.log(message);
+// }
+// compareBMI(mark,john);
+
+
+// challenge 4
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52]; 
+const tips = [];
+const totals = [];
+const calctip = function (bill) {
+  const tip = (bill >= 50 && bill <= 300) ? 
+  0.15 * bill : 0.2 * bill;
+  return tip;
+};
+for (i=0; i < bills.length; i++ ) {
+  tips.push(calctip(bills[i]));
+  totals.push(bills[i] + calctip(bills[i]));
+};
+const calcAverage = function(arr) {
+  let sum = 0;
+  for(i=0; i<arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum/arr.length;
 }
-compareBMI(mark,john);
+console.log(totals);
+console.log(calcAverage(totals));
+// calc the element average of a given array.
