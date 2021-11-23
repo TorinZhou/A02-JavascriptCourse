@@ -28,8 +28,12 @@
 // };
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
+let message = '';
 const scoreArray = [];
 
+function outPutMessage() {
+  document.querySelector('.message').textContent = message;
+}
 document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.message').textContent = 'Start guessing...';
   score = 20;
@@ -57,16 +61,17 @@ document.querySelector('.check').addEventListener('click', function () {
 
 function compare(a, b) {
   if (a === b) {
-    document.querySelector('.message').textContent = 'COOL!!';
+    message = 'COOL!!';
     highScore();
     callWinnerCSS();
   } else if (a < b) {
-    document.querySelector('.message').textContent = 'Too low!';
+    message = 'Too low!';
     deScore();
   } else {
-    document.querySelector('.message').textContent = 'Too high!';
+    message = 'Too high!';
     deScore();
   }
+  outPutMessage();
 }
 
 function deScore() {
