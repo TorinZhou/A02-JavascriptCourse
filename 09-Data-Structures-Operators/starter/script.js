@@ -290,71 +290,97 @@ Logical Assignment Operators   since ES2021
 challenge
 ####################################*/
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: { team1: 1.33, x: 3.25, team2: 6.5 },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: { team1: 1.33, x: 3.25, team2: 6.5 },
+// };
 
-// TASK 1. Create one player array for each team (variables 'players1' and 'players2')
-const [players1, players2] = game.players;
+// // TASK 1. Create one player array for each team (variables 'players1' and 'players2')
+// const [players1, players2] = game.players;
 
-// TASK 2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
-const [gk, ...fieldPlayers] = players1;
+// // TASK 2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
+// const [gk, ...fieldPlayers] = players1;
 
-// TASK 3. Create an array 'allPlayers' containing all players of both teams (22 players)
-const allPlayers = [...players1, ...players2]; // note that not game.players.
-// console.log(allPlayers);
-// TASK 4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
-const players1Final = [...players1, `Thiago`, `Coutinho`, `Perisic`];
+// // TASK 3. Create an array 'allPlayers' containing all players of both teams (22 players)
+// const allPlayers = [...players1, ...players2]; // note that not game.players.
+// // console.log(allPlayers);
+// // TASK 4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
+// const players1Final = [...players1, `Thiago`, `Coutinho`, `Perisic`];
 
-// TASK 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
-// const { team1, x: draw, team2 } = game.odds;
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
-console.log(draw);
-// TASK 6. Write a function ('printGoals') that receives an arbitrary number of player names (not an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
-// Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
-game.printGoals = function (...scoreList) {
-  for (let i = 0; i < scoreList.length; i++) {
-    console.log(`${scoreList[i]} got the number ${[i + 1]} goal`);
-  }
-};
-game.printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
-game.printGoals(...game.scored);
+// // TASK 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+// // const { team1, x: draw, team2 } = game.odds;
+// const {
+//   odds: { team1, x: draw, team2 },
+// } = game;
+// console.log(draw);
+// // TASK 6. Write a function ('printGoals') that receives an arbitrary number of player names (not an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+// // Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+// game.printGoals = function (...scoreList) {
+//   for (let i = 0; i < scoreList.length; i++) {
+//     console.log(`${scoreList[i]} got the number ${[i + 1]} goal`);
+//   }
+// };
+// game.printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// game.printGoals(...game.scored);
 
-// TASK 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator.
-team1 > team2 && console.log('team 2 will win');
-team2 > team1 && console.log('team 1 will win');
+// // TASK 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator.
+// team1 > team2 && console.log('team 2 will win');
+// team2 > team1 && console.log('team 1 will win');
+
+/* ################################# 
+LOOPING ARRAYS: FOR...OF LOOP
+####################################*/
+const menu = [1, 2, 3, 4, 5];
+// regular loop
+for (let i = 0; i < menu.length; i++) {
+  console.log(menu[i]);
+}
+// for of loop
+for (const num of menu) {
+  console.log(num);
+}
+// for of loop with index
+for (const num of menu.entries()) {
+  console.log(num); // return 5 arrays.[0,1],[1,2]...[4,5]
+}
+// let see what is menu.entries
+console.log(menu.entries()); // Array Iterator {}
+// Not helpful.
+console.log([...menu.entries()]); //(5) [Array(2), Array(2), Array(2), Array(2), Array(2)]
+// well now its clear, menu.entries() itself is a array/
+// since every num is an array , we can use destructuring
+for (const [i, el] of menu.entries()) {
+  console.log(`${i}: ${el}`); // important.
+}
