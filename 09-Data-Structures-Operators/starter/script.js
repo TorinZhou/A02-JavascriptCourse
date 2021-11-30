@@ -362,25 +362,248 @@ challenge
 /* ################################# 
 LOOPING ARRAYS: FOR...OF LOOP
 ####################################*/
-const menu = [1, 2, 3, 4, 5];
-// regular loop
-for (let i = 0; i < menu.length; i++) {
-  console.log(menu[i]);
+// const menu = [1, 2, 3, 4, 5];
+// // regular loop
+// for (let i = 0; i < menu.length; i++) {
+//   console.log(menu[i]);
+// }
+// // for of loop
+// for (const num of menu) {
+//   console.log(num);
+// }
+// // for of loop with index
+// for (const num of menu.entries()) {
+//   console.log(num); // return 5 arrays.[0,1],[1,2]...[4,5]
+// }
+// // let see what is menu.entries
+// console.log(menu.entries()); // Array Iterator {}
+// // Not helpful.
+// console.log([...menu.entries()]); //(5) [Array(2), Array(2), Array(2), Array(2), Array(2)]
+// // well now its clear, menu.entries() itself is a array/
+// // since every num is an array , we can use destructuring
+// for (const [i, el] of menu.entries()) {
+//   console.log(`${i}: ${el}`); // important.
+// }
+
+/* ################################# 
+ENHANCED OBJECT LITERALS (creat an object literally in code)
+####################################*/
+
+// // 1.  add obj to obj
+// const obj1 = {
+//   name: 'torin',
+// };
+// const obj2 = {
+//   home: 'harbin',
+//   // obj1: obj1,
+//   obj1, // in es6, no need to write obj1:obj1, just obj1,
+// };
+// console.log(obj2);
+// // 2. writing methods.
+// const obj3 = {
+//   calc: function (a, b) {},
+//   // ES6 Function, get rid of ":" and "function". COOL
+//   calc1(a, b) {},
+// };
+
+// // 3. Computed property names istead of literally code out
+// const propertyNames = ['name1', 'name2', 'nema3', 'name4'];
+// const obj4 = {
+//   [propertyNames[0]]: 1,
+//   [propertyNames[1]]: 2,
+//   [`${propertyNames[2]}Whatever`]: 3,
+// };
+// console.log(obj4);
+
+/* ################################# 
+OPTIONAL CHAINING (?.)
+####################################*/
+// const restaurant = {
+//   openingHours: {
+//     thu: {
+//       open: 12,
+//       close: 22,
+//     },
+//     fri: {
+//       open: 11,
+//       close: 23,
+//     },
+//     sat: {
+//       open: 0, // Open 24 hours
+//       close: 24,
+//     },
+//   },
+// };
+// // we don't know if a restarant open on monday
+// // will get a undefined.open  which is an error
+// // console.log(restaurant.openingHours.mon.open);
+// // we will have to check
+// restaurant.openingHours.fri && console.log(restaurant.openingHours.fri.open);
+// // What if openingHours is also optional?
+// // Are we going to check both?
+// // IN ES2020: OPTIONAL CHAINING: IF a certain property
+// // dose not exist, it will return undefine immediately
+// // will avoid the undefine.whatever error.
+// // ^^^^^^^^^^^
+// console.log(restaurant.openingHours?.mon?.open);
+// // ? means not undefine or null
+// // EXAMPLE
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// for (const day of days) {
+//   if (restaurant.openingHours?.[day]) {
+//     console.log(`on ${day}, we open at ${restaurant.openingHours[day].open}`);
+//   } else {
+//     console.log(`on ${day}, we close`);
+//   }
+// }
+// // other way
+// for (const day of days) {
+//   const openInfo = restaurant.openingHours[day]?.open ?? 'closed';
+//   console.log(`On ${day}, we open at ${openInfo}`);
+// }
+// // on thu, we open at 12
+// // on fri, we open at 11
+// // on sat, we open at 0
+
+/* ################################# 
+OPTIONAL CHAINING IN METHODS
+####################################*/
+// const restaurant = {};
+// // console.log(restaurant?.order());  not this way
+// console.log(restaurant.order?.() ?? 'Method dose not exist');
+
+/* ################################# 
+OPTIONAL CHAINING IN ARRAYS
+####################################*/
+// const users = [
+//   { name: 'Torin', age: 31 },
+//   { name: 'Mike', age: 25 },
+// ];
+// console.log(users[5]?.name ?? 'no such user');
+
+/* ################################# 
+LOOPING OBJECTS
+####################################*/
+
+// Property NAMES
+
+// const obj = { prop1: '1', prop2: '2', prop3: '3' };
+// const properties = Object.keys(obj); // get the propName array
+// console.log(properties); // (3) ['prop1', 'prop2', 'prop3']
+
+// // Property VALUES
+// const propValues = Object.values(obj);
+// console.log(propValues); // (3) ['1', '2', '3']
+
+// // Property KEY+VALUES
+// const wholeProperty = Object.entries(obj);
+// console.log(wholeProperty);
+// // [Array(2), Array(2), Array(2)]
+
+// // Remember how we loop arrays? This is a Review
+// // the enteies method of any array
+// const arrayTest = [1, 2, 3, 4, 5];
+// console.log(arrayTest.entries()); // Array Iterator {}
+// for (const index of arrayTest.entries()) {
+//   console.log(index);
+// } // [0,1],[1,2]....[4,5]
+// for (const [i, value] of arrayTest.entries()) {
+//   console.log([i, value]);
+// } // [0,1],[1,2]....[4,5]
+// for (const index of arrayTest) {
+//   console.log(index);
+// } // 1, 2, 3, 4, 5
+
+// // Loop over the objects
+// for (const [key, prop] of Object.entries(obj)) {
+//   console.log(key);
+// }
+
+/* #################################
+CHALLANGE 2
+####################################*/
+/* Coding Challenge #2 Let's continue with our football betting app! Keep using the 'game' variable from before. 
+Your tasks: 
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski") 
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember) 
+3. Print the 3 odds to the console, but in a nice formatted way, exactly like this: Odd of victory Bayern Munich: 1.33 Odd of draw: 3.25  Odd of victory Borrussia Dortmund: 6.5 Get the team names directly from the game object, don't hardcode them (except for "draw"). Hint: Note how the odds and the game objects have the same property names 😉 
+4. Bonus: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this: {   Gnarby: 1,   Hummels: 1,   Lewandowski: 2 } 
+GOOD LUCK  */
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: { team1: 1.33, x: 3.25, team2: 6.5 },
+};
+// 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+for (const [index, value] of game.scored.entries()) {
+  console.log(`Goal ${index + 1}: ${value}`);
 }
-// for of loop
-for (const num of menu) {
-  console.log(num);
+
+// 2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+function calcAverageOdd(obj) {
+  let sum = 0;
+  for (const [, value] of Object.entries(obj.odds)) {
+    sum += value;
+  }
+  console.log(sum / Object.entries(obj.odds).length);
 }
-// for of loop with index
-for (const num of menu.entries()) {
-  console.log(num); // return 5 arrays.[0,1],[1,2]...[4,5]
+calcAverageOdd(game);
+
+// 3. Print the 3 odds to the console, but in a nice formatted way, exactly like this: Odd of victory Bayern Munich: 1.33 Odd of draw: 3.25  Odd of victory Borrussia Dortmund: 6.5 Get the team names directly from the game object, don't hardcode them (except for "draw"). Hint: Note how the odds and the game objects have the same property names 😉
+
+function printOdds(obj) {
+  for (const [name, value] of Object.entries(obj.odds)) {
+    if (name !== 'team1' && name !== 'team2') {
+      console.log(`Odd of draw : ${value}`);
+    } else {
+      console.log(`Odd of victory ${obj[name]}: ${value}`);
+    }
+  }
 }
-// let see what is menu.entries
-console.log(menu.entries()); // Array Iterator {}
-// Not helpful.
-console.log([...menu.entries()]); //(5) [Array(2), Array(2), Array(2), Array(2), Array(2)]
-// well now its clear, menu.entries() itself is a array/
-// since every num is an array , we can use destructuring
-for (const [i, el] of menu.entries()) {
-  console.log(`${i}: ${el}`); // important.
+printOdds(game);
+
+// 4. Bonus: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this: {   Gnarby: 1,   Hummels: 1,   Lewandowski: 2 }
+// scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+
+const scorers = {};
+// let sum = 0;
+// for (const [, name] of game.scored.entries()) {
+//   scorers[name]?;
+// }
+
+for (const player of game.scored) {
+  console.log(player);
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
+console.log(scorers);
