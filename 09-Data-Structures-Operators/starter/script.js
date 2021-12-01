@@ -641,3 +641,37 @@ SETS
 // const arrayWithDuplicateEl = ['Torin', 'Torin', 'Torin', 'Zhou', 'Zhou'];
 // const optimizedArray = [...new Set(arrayWithDuplicateEl)];
 // console.log(optimizedArray);  // ['Torin', 'Zhou']
+
+/* #################################
+MAPS FOUNDAMENTALS
+####################################*/
+// // 1. Creat an empty map
+// const rest = new Map();
+// rest.set('keyName', 'value');
+// rest.set(1, 'USA');
+// rest.set(2, 'RUSSIA'); // .set will automatically return the new map.
+// console.log(rest.set(3, 'China')); // Map(4) {'keyName' => 'value', 1 => 'USA', 2 => 'UK', 3 => 'China'}
+// rest.set('Categories', ['Good', 'Bad']).set('Answer', 'USA'); // .set chain
+// rest.set(true, 'Smart Choice👍').set(false, 'What the fuck?😃');
+
+// // 2. Retrieve data: .get()C
+// console.log(rest.get(2)); // RUSSIA
+// console.log(rest.get(prompt('Choose a Country') !== 'China')); // usage of boolean keys.
+
+// // 3. Existence .has()
+// console.log(rest.has(2)); //true
+
+// // 4. Delete
+// rest.delete('Categories');
+
+// // 5. Size
+// rest.size; // no()
+// console.log(rest.size); // 7
+
+// // 6. Clear
+// // rest.clear();
+
+// // 7. Array & Objects KEYS
+// rest.set([1, 2], 'Test'); // {Array(2) => 'Test}
+// rest.get([1, 2]); // undefine, not the same [1, 2] in the heap. [1,2] != [1,2]
+// rest.set(document.querySelector('h1'), 'Heading');
