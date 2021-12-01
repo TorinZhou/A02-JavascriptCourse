@@ -598,3 +598,46 @@ CHALLANGE 2
 //   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 // }
 // console.log(scorers);
+
+/* #################################
+SETS
+####################################*/
+// // 1. Pass in Any ***ITERABLE***
+// const anArray = [1, 2, 2, 2, 2];
+// const aSet = new Set(anArray);
+// const aStringSet = new Set('Torin Zhou');
+// console.log(aSet); // Set(2) {1, 2}
+// console.log(aStringSet); // Set(9) {'T', 'o', 'r', 'i', 'n', …}  (Strings are iterable)
+// /* order of elements in a set is irrelevant. */
+
+// // 2. Size of a set vs Lengh of an array.
+// const size = aStringSet.size;
+
+// // 3. Check Existence  set.has();
+// const result = aStringSet.has('Z', 'h', 'o', 'u', '');
+// console.log(result); //true
+
+// // 4. Add New Element  set.add();
+// aSet.add(3);
+// aSet.add(3);
+// console.log(aSet); // Set(3) {1, 2, 3}
+
+// // 5. Delete Element
+// aSet.delete(0); // no error
+// aSet.delete(2); // Set(2) {1, 3}
+// aSet.clear(); // Delete all
+// console.log(aSet); // empty
+
+// // 6. Retrieve Values (note that set has no indexs)
+// console.log('There`s no way to get values out of set');
+// console.log('If you wanna retrieve, then use Array');
+
+// // 7. Loop over Sets
+// for (const whatever of aSet) {
+//   console.log(whatever);
+// }
+
+// // 8.EXAMPLE: REMOVE DUPLICATE ELEMENTS FROM ARRAY and RETURN A NEW ARRAY
+// const arrayWithDuplicateEl = ['Torin', 'Torin', 'Torin', 'Zhou', 'Zhou'];
+// const optimizedArray = [...new Set(arrayWithDuplicateEl)];
+// console.log(optimizedArray);  // ['Torin', 'Zhou']
