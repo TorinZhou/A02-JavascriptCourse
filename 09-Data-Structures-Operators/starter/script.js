@@ -675,3 +675,108 @@ MAPS FOUNDAMENTALS
 // rest.set([1, 2], 'Test'); // {Array(2) => 'Test}
 // rest.get([1, 2]); // undefine, not the same [1, 2] in the heap. [1,2] != [1,2]
 // rest.set(document.querySelector('h1'), 'Heading');
+
+/* #################################
+MAPS FOUNDAMENTALS 2
+####################################*/
+// // 1. Another way to set up a map: array [[],[]] => map
+// const question = new Map([
+//   ['question', 'Choose Lanugage'],
+//   [1, 'C'],
+//   [2, 'Python'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct 👍'],
+//   [false, 'What the fuck? 😃'],
+// ]);
+// console.log(question);
+
+// // 2. An easy way to conver from obj to map
+// const obj = { key1: 1, key2: 2, key3: 3 };
+// console.log(Object.entries(obj)); // [Array(2), Array(2), Array(2)]  same constructure as set up a map
+// const mapConvert = new Map(Object.entries(obj));
+
+// // 3. Iterate
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') {
+//     console.log(`Answer ${key} : ${value}`);
+//   }
+// }
+// const answer = Number(prompt('Your answer?'));
+// console.log(question.get(answer === question.get('correct')));
+
+// // 4. Conver Map back to Array: MAP => [[],[]]
+// const arr = [...question];
+// console.log([...question][0]); // ['question', 'Choose Lanugage']
+
+// // 5. entries, keys , values.
+// console.log(question); // same as entries??????
+// console.log(question.entries()); // get a strange MapIterator
+// console.log(question.keys()); // MapIterator {'question', 1, 2, 3, 'correct', …}
+// console.log(question.values()); // have to spread it
+// console.log(...question.keys()); // question 1 2 3 correct true false
+
+/* #################################
+CHOOSE DATA STRUCTURE
+####################################*/
+// 1.  Array or Sets for simple list
+// 2.  Objects OR Maps for KEY/VALUE
+// # BUTIL-IN
+//  - Object
+//  - Map
+//  - Array
+//  - Set
+//  - WeakMap
+//  - WeakSet
+// # NON-BUILT IN
+//  - Stacks
+//  - queueS
+//  - Linket lists
+//  - Trees
+//  - Hash Tables
+// 3. Maps vs obj
+/* MAP : EASY TO ITERATE
+EASY TO COMPUTE SIZE
+ANY TYPES OF KET*/
+
+/* #################################
+CHALLANGE
+####################################*/
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// 1. Create an array 'events' of the different game events that happened (no duplicates)
+const arrAssistence = [];
+for (const [, value] of gameEvents) {
+  arrAssistence.push(value);
+}
+const arr = [...new Set(arrAssistence)];
+console.log(arr);
+
+// 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3. Compute and log the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+// 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this: [FIRST HALF] 17: Goal
+for (const [time, issue] of gameEvents) {
+  let prefix = '';
+  time < 45 ? (prefix = '[FIRST HALF]') : (prefix = '[SECOND HALF]');
+  console.log(`${prefix} ${time}: ${issue}`);
+}
