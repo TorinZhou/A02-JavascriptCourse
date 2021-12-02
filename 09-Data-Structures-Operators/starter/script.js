@@ -783,92 +783,115 @@ CHALLANGE
 /* #################################
 STRINGS
 ####################################*/
-// 1. JUST LIKE AN ARRAY
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
-console.log(plane[0]); // A
-console.log(plane[1]); // '3'
-console.log(airline.length); // 16
+// // 1. JUST LIKE AN ARRAY
+// const airline = 'TAP Air Portugal';
+// const plane = 'A320';
+// console.log(plane[0]); // A
+// console.log(plane[1]); // '3'
+// console.log(airline.length); // 16
 
-// 2. METHODS
-// 2.1 IndexOf
-console.log(airline.indexOf('r')); // 6.    indexOf
-console.log(airline.lastIndexOf('r')); // 10      lastIndexof
-console.log(airline.indexOf('Air')); // 4
-// 2.2 slice (Creat a sub string, the original won't change, Thay are primitives)
-console.log(airline.slice(4, 7)); // Air
-console.log(airline.slice(1, -1)); // AP Air Portuga
-console.log(airline.slice(4)); // Air Portugal
-console.log(airline); // TAP Air Portugal ,
-console.log(airline.slice(0, airline.indexOf(' '))); //Tap
-console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal;
+// // 2. METHODS
+// // 2.1 IndexOf
+// console.log(airline.indexOf('r')); // 6.    indexOf
+// console.log(airline.lastIndexOf('r')); // 10      lastIndexof
+// console.log(airline.indexOf('Air')); // 4
+// // 2.2 slice (Creat a sub string, the original won't change, Thay are primitives)
+// console.log(airline.slice(4, 7)); // Air
+// console.log(airline.slice(1, -1)); // AP Air Portuga
+// console.log(airline.slice(4)); // Air Portugal
+// console.log(airline); // TAP Air Portugal ,
+// console.log(airline.slice(0, airline.indexOf(' '))); //Tap
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal;
 
-// 2.3 check middle seat
-const checkMiddleSeat = function (seat) {
-  // B and E: middle seats11B
-  const checker = seat.slice(-1);
-  if (checker === 'B' || checker === 'E' || checker === 'b' || checker === 'e')
-    return true;
-  else return false;
-};
-console.log(checkMiddleSeat(prompt('type in seat')));
+// // 2.3 check middle seat
+// const checkMiddleSeat = function (seat) {
+//   // B and E: middle seats11B
+//   const checker = seat.slice(-1);
+//   if (checker === 'B' || checker === 'E' || checker === 'b' || checker === 'e')
+//     return true;
+//   else return false;
+// };
+// console.log(checkMiddleSeat(prompt('type in seat')));
 
-// 2.4
-// behinde the scene
-console.log(new String('11B').slice(-1)); // B
+// // 2.4
+// // behinde the scene
+// console.log(new String('11B').slice(-1)); // B
 
-// 2.5 Case transform
-console.log(airline.toLowerCase());
-console.log(airline.toUpperCase());
-console.log(airline.toLocaleLowerCase()); // ?
+// // 2.5 Case transform
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
+// console.log(airline.toLocaleLowerCase()); // ?
 
-// 2.6 Trim
-const badEmail = '   torinZhou@GMAIL.COM  \n';
-const goodEmail = badEmail.toLowerCase().trim();
-console.log(goodEmail); // torinzhou.gmail.com
-1;
-// Since ES2019
-// '  ddd  '.trimLeft();
-// '  ddd  '.trimRight();
-// '  ddd  '.trimStart();
-// '  ddd  '.trimEnd();
+// // 2.6 Trim
+// const badEmail = '   torinZhou@GMAIL.COM  \n';
+// const goodEmail = badEmail.toLowerCase().trim();
+// console.log(goodEmail); // torinzhou.gmail.com
+// 1;
+// // Since ES2019
+// // '  ddd  '.trimLeft();
+// // '  ddd  '.trimRight();
+// // '  ddd  '.trimStart();
+// // '  ddd  '.trimEnd();
 
-// 2.7 Replacing
-const priceGB = '288,97£';
-const priceUS = priceGB.replace('£', '$').replace(',', '.');
-console.log(priceUS);
-const announcement =
-  'All passengers come to bording door 23. Boarding door 23!';
-console.log(announcement.replace('door', 'gate'));
-// replace the first 'door', replaceAll is now included in MDN documentation and the ECMA-262 (2021) spec, but replaceAll still isn't widely available in all browsers.
-// now use regular expression instead
-console.log(announcement.replace(/door/g, 'gate'));
-// /door/g, g stands for globle.
+// // 2.7 Replacing
+// const priceGB = '288,97£';
+// const priceUS = priceGB.replace('£', '$').replace(',', '.');
+// console.log(priceUS);
+// const announcement =
+//   'All passengers come to bording door 23. Boarding door 23!';
+// console.log(announcement.replace('door', 'gate'));
+// // replace the first 'door', replaceAll is now included in MDN documentation and the ECMA-262 (2021) spec, but replaceAll still isn't widely available in all browsers.
+// // now use regular expression instead
+// console.log(announcement.replace(/door/g, 'gate'));
+// // /door/g, g stands for globle.
 
-// 2.8 Bolleans: includes(), startsWith(), endsWith()
-const plane2 = 'Airbus A320neo';
-console.log(plane2.includes('A320')); //true
-console.log(plane2.startsWith('Air')); //true
-console.log(plane2.endsWith('neo')); //true
+// // 2.8 Bolleans: includes(), startsWith(), endsWith()
+// const plane2 = 'Airbus A320neo';
+// console.log(plane2.includes('A320')); //true
+// console.log(plane2.startsWith('Air')); //true
+// console.log(plane2.endsWith('neo')); //true
 
-// 2.9 str.split() str.join()
-const str = 'a+very+nice+string';
-console.log(str.split('+')); // (4) ['a', 'very', 'nice', 'string']
-const [firstName, lastName] = 'Torin Zhou'.split(' ');
-console.log(firstName);
-const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
-console.log(newName);
+// // 2.9 str.split() str.join()
+// const str = 'a+very+nice+string';
+// console.log(str.split('+')); // (4) ['a', 'very', 'nice', 'string']
+// const [firstName, lastName] = 'Torin Zhou'.split(' ');
+// console.log(firstName);
+// const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+// console.log(newName);
 
-// 2.10 Padding a String
-const message = 'Go to gate 23!';
-console.log(message.padStart(20, '+')); // ++++++Go to gate 23!
-console.log(message.padEnd(20, '+')); // Go to gate 23!++++++
+// // 2.10 Padding a String
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(20, '+')); // ++++++Go to gate 23!
+// console.log(message.padEnd(20, '+')); // Go to gate 23!++++++
 
-// mask credit card function
-const maskCreditCard = function (number) {
-  const str = number + ''; // add an empty string
-  const last = str.slice(-4);
-  return last.padStart(str.length, '*');
-};
-console.log(maskCreditCard(4581230118540949));
-maskCreditCard('4581230118540949');
+// // mask credit card function
+// const maskCreditCard = function (number) {
+//   const str = number + ''; // add an empty string
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+// console.log(maskCreditCard(4581230118540949));
+// maskCreditCard('4581230118540949');
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const textArr = text.split(' ');
+  const textArrOptm = [];
+  for (const str of textArr) {
+    if (str.length !== 0) {
+      textArrOptm.push(str.toLowerCase());
+    }
+  }
+  console.log(textArrOptm); // ['underscore_case', 'first_name', 'Some_Variable', 'calculate_AGE', 'delayed_departure']
+  let i = 1;
+  for (const strLower of textArrOptm) {
+    const [first, second] = strLower.split('_');
+    const resultRough =
+      first + second.replace(second[0], second[0].toUpperCase());
+    const finalText = resultRough.padEnd(25, ' ') + ''.padEnd(i, '✅');
+    console.log(finalText);
+    i++;
+  }
+});
