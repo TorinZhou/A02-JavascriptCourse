@@ -743,40 +743,132 @@ ANY TYPES OF KET*/
 /* #################################
 CHALLANGE
 ####################################*/
-const gameEvents = new Map([
-  [17, '⚽ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽ GOAL'],
-  [80, '⚽ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// const gameEvents = new Map([
+//   [17, '⚽ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽ GOAL'],
+//   [80, '⚽ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
 
-// 1. Create an array 'events' of the different game events that happened (no duplicates)
-const arrAssistence = [];
-for (const [, value] of gameEvents) {
-  arrAssistence.push(value);
-}
-const arr = [...new Set(arrAssistence)];
-console.log(arr);
+// // 1. Create an array 'events' of the different game events that happened (no duplicates)
+// const arrAssistence = [];
+// for (const [, value] of gameEvents) {
+//   arrAssistence.push(value);
+// }
+// const arr = [...new Set(arrAssistence)];
+// console.log(arr);
 
-// 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
-gameEvents.delete(64);
-console.log(gameEvents);
+// // 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+// gameEvents.delete(64);
+// console.log(gameEvents);
 
-// 3. Compute and log the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
-console.log(
-  `An event happened, on average, every ${90 / gameEvents.size} minutes`
-);
+// // 3. Compute and log the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
 
-// 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this: [FIRST HALF] 17: Goal
-for (const [time, issue] of gameEvents) {
-  let prefix = '';
-  time < 45 ? (prefix = '[FIRST HALF]') : (prefix = '[SECOND HALF]');
-  console.log(`${prefix} ${time}: ${issue}`);
-}
+// // 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this: [FIRST HALF] 17: Goal
+// for (const [time, issue] of gameEvents) {
+//   const prefix = time <= 45 ? 'First' : 'Second';
+//   console.log(`${prefix} ${time}: ${issue}`);
+// }
+
+/* #################################
+STRINGS
+####################################*/
+// 1. JUST LIKE AN ARRAY
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+console.log(plane[0]); // A
+console.log(plane[1]); // '3'
+console.log(airline.length); // 16
+
+// 2. METHODS
+// 2.1 IndexOf
+console.log(airline.indexOf('r')); // 6.    indexOf
+console.log(airline.lastIndexOf('r')); // 10      lastIndexof
+console.log(airline.indexOf('Air')); // 4
+// 2.2 slice (Creat a sub string, the original won't change, Thay are primitives)
+console.log(airline.slice(4, 7)); // Air
+console.log(airline.slice(1, -1)); // AP Air Portuga
+console.log(airline.slice(4)); // Air Portugal
+console.log(airline); // TAP Air Portugal ,
+console.log(airline.slice(0, airline.indexOf(' '))); //Tap
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal;
+
+// 2.3 check middle seat
+const checkMiddleSeat = function (seat) {
+  // B and E: middle seats11B
+  const checker = seat.slice(-1);
+  if (checker === 'B' || checker === 'E' || checker === 'b' || checker === 'e')
+    return true;
+  else return false;
+};
+console.log(checkMiddleSeat(prompt('type in seat')));
+
+// 2.4
+// behinde the scene
+console.log(new String('11B').slice(-1)); // B
+
+// 2.5 Case transform
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+console.log(airline.toLocaleLowerCase()); // ?
+
+// 2.6 Trim
+const badEmail = '   torinZhou@GMAIL.COM  \n';
+const goodEmail = badEmail.toLowerCase().trim();
+console.log(goodEmail); // torinzhou.gmail.com
+1;
+// Since ES2019
+// '  ddd  '.trimLeft();
+// '  ddd  '.trimRight();
+// '  ddd  '.trimStart();
+// '  ddd  '.trimEnd();
+
+// 2.7 Replacing
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+const announcement =
+  'All passengers come to bording door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+// replace the first 'door', replaceAll is now included in MDN documentation and the ECMA-262 (2021) spec, but replaceAll still isn't widely available in all browsers.
+// now use regular expression instead
+console.log(announcement.replace(/door/g, 'gate'));
+// /door/g, g stands for globle.
+
+// 2.8 Bolleans: includes(), startsWith(), endsWith()
+const plane2 = 'Airbus A320neo';
+console.log(plane2.includes('A320')); //true
+console.log(plane2.startsWith('Air')); //true
+console.log(plane2.endsWith('neo')); //true
+
+// 2.9 str.split() str.join()
+const str = 'a+very+nice+string';
+console.log(str.split('+')); // (4) ['a', 'very', 'nice', 'string']
+const [firstName, lastName] = 'Torin Zhou'.split(' ');
+console.log(firstName);
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+// 2.10 Padding a String
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+')); // ++++++Go to gate 23!
+console.log(message.padEnd(20, '+')); // Go to gate 23!++++++
+
+// mask credit card function
+const maskCreditCard = function (number) {
+  const str = number + ''; // add an empty string
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+console.log(maskCreditCard(4581230118540949));
+maskCreditCard('4581230118540949');
