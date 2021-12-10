@@ -208,20 +208,44 @@ const runOnce = function () {
   console.log('This will never run again');
 })();
 (() => console.log('This arrFunction will never run again'))();
-
 /* #################################
 CLOUSURE
 ####################################*/
-const secureBooking = function () {
-  let passengerCount = 0;
+// const secureBooking = function () {
+//   let passengerCount = 0;
 
-  return function () {
-    passengerCount++;
-    console.log(`${passengerCount}`);
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount}`);
+//   };
+// };
+
+// const booker = secureBooking();
+// console.dir(booker);
+// booker();
+// booker();
+// booker();
+// const a = 5;
+// function test() {
+//   const b = 6;
+// }
+// console.dir(test);
+
+/* #################################
+Challange
+####################################*/
+let showDetail;
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  const changeColor = function () {
+    header.style.color = 'blue';
   };
-};
-
-const booker = secureBooking();
-booker();
-booker();
-booker();
+  document.querySelector('body').addEventListener('click', changeColor);
+  console.dir(changeColor); //sucessiful run
+  showDetail = function () {
+    console.dir(changeColor);
+  };
+})();
+showDetail(); // sucessiful run
+console.dir(changeColor); // undefine
