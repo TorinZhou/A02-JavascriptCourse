@@ -163,3 +163,48 @@ arr4 maps sets foreach
 // a.forEach(function (value,key) {
 //   console.log(` ${value}`); //
 // });
+
+/* #################################
+challange
+####################################*/
+// Julia and Kate are still studying dogs, and this time they are studying if dogs are eating too much or too little. Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite. Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).
+// Your tasks: 1. Loop over the 'dogs' array containing dog objects, and for each dog, calculate the recommended food portion and add it to the object as a new property. Do not create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 2. Find Sarah's dog and log to the console whether it's eating too much or too little. Hint: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose) 🤓
+
+// 3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+//1,2,3 ✔✔✔✔✔✔✔✔
+const ownersEatToomuch = [];
+const ownersEatToolittle = [];
+dogs.forEach(function (dog) {
+  dog.recommendedFood = dog.weight ** 0.75 * 28;
+  if (dog.curFood > 1.1 * dog.recommendedFood) {
+    dog.food = 'Too Much';
+    ownersEatToomuch.push(...dog.owners);
+  } else if (dog.curFood < 0.9 * dog.recommendedFood) {
+    dog.food = 'Too Low';
+    ownersEatToolittle.push(...dog.owners);
+  } else {
+    dog.food = 'normal';
+  }
+});
+
+for (const dog of dogs) {
+  if (dog.owners.includes(`Sarah`)) {
+    console.log(`Sarah's dog is eating ${dog.food}`);
+    break;
+  }
+}
+console.log(dogs, ownersEatToolittle, ownersEatToomuch);
+// 4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+
+function myFunction(arr) {
+  return arr.slice().filter(ele => ele === arr[0]).length === arr.length;
+}
+console.log(myFunction([1, 1, 2, 1]));
