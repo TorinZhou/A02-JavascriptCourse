@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -251,3 +251,50 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+console.log(23 === 23.0); //true
+
+// Base 10 ~ 0 to 9.   1/10 = 0.1  3/10 = 3.33333
+// Binary base 2 ~ 0 1
+console.log(0.1 + 0.2); // 0.3000000000004
+console.log(0.1 + 0.2 === 0.3); // false
+
+// Type coercion
+console.log(+`23`);
+console.log(Number(`23`));
+
+// Number.parseInt()  Number.parseFloat()
+console.log(Number.parseInt(`30px`, 10)); // 30rem => 30
+console.log(Number.parseInt(`1Fpx`, 16)); // 31 ????
+console.log(Number.parseInt(`17px`, 8)); // 15 ???
+console.log(Number.parseInt(`11px`, 2)); // 7
+console.log(Number.parseInt(`px30`, 10)); // NaN
+console.log(Number.parseInt(`   2.5rem`)); // 2 (blocks won't count)
+console.log(Number.parseFloat(`    2.5rem`)); // 2.5
+
+// Number.isNaN()  (true: number && NaN)   (false:else)
+// Check if value is NaN (really NaN)
+console.log(20 / 0); // Infinity
+console.log(0 / 0); // NaN
+console.log(+`23whatever`); // NaN
+
+console.log(typeof (20 / 0)); // number Infinity
+console.log(typeof (0 / 0)); // number NaN
+console.log(typeof NaN); // number
+console.log(typeof +`23whatever`); // number
+
+console.log(Number.isNaN(20)); // false
+console.log(Number.isNaN(20 / 0)); // false number but not a NaN
+console.log(Number.isNaN(0 / 0)); // true
+console.log(Number.isNaN(NaN)); // true
+
+// Number.isFinite()  Best way to check if a value is a number.
+console.log(Number.isFinite(20)); // true
+console.log(Number.isFinite(`20`)); // false
+console.log(Number.isFinite(+`20`)); // true
+console.log(Number.isFinite(23 / 0)); // false
+
+// Number.isInteger()  check Interger
+console.log(Number.isInteger(23)); // true
+console.log(Number.isInteger(23.0)); // true
+console.log(Number.isInteger(23 / 0)); // false
