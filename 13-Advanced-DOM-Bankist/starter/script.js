@@ -4,6 +4,8 @@ const scrollLinkLearnMore = document.querySelector('.btn--scroll-to');
 const header = document.querySelector('.header');
 const section1 = document.getElementById('section--1');
 const section2 = document.getElementById('section--2');
+const section3 = document.getElementById('section--3');
+const section4 = document.getElementById('section--4');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -127,13 +129,140 @@ const stickyNav = function (entries) {
   } else nav.classList.remove('sticky');
 };
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+// console.log(navHeight);
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+/* #################################
+reveal sections
+####################################*/
+const sections = document.querySelectorAll('.section');
+// seclect all sections ✔
+
+const revealSections = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry, observer);
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+// observer callback✔
+
+const sectionObserver = new IntersectionObserver(revealSections, {
+  root: null,
+  threshold: 0.15,
+});
+// new observer
+
+sections.forEach(section => {
+  // section.classList.add('section--hidden');
+  sectionObserver.observe(section);
+});
+// call observer for each section
+
+/* #################################
+Lazy img
+####################################*/
+const featuresImgs = document.querySelectorAll('img[data-src]');
+const lazyImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  console.log(entry);
+  entry.target.src = entry.target.dataset.src;
+  //  IMG successfully load => remove lazy-img class
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+const featuresImgsObserver = new IntersectionObserver(lazyImg, {
+  root: null,
+  threshold: 0.5,
+});
+featuresImgs.forEach(ele => featuresImgsObserver.observe(ele));
+
+/* #################################
+Slider
+####################################*/
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
+const sliderBtnLeft = document.querySelector('.slider__btn--left');
+const sliderBtnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+
+const creatDots = function () {
+  slides.forEach(function (_, i) {
+    dotsContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+creatDots();
+const dots = document.querySelectorAll('.dots__dot');
+
+const changeSlide = function (targetSlide) {
+  slides.forEach(function (slide, i) {
+    slide.style.transform = `translateX(${(i - targetSlide) * 100}%)`;
+  });
+};
+
+const activeDot = function (targetSlide) {
+  // console.log(dots);
+  dots.forEach(dot => dot.classList.remove('dots__dot--active'));
+  document
+    .querySelector(`.dots__dot[data-slide="${targetSlide}"]`)
+    .classList.add('dots__dot--active');
+};
+
+const init = function () {
+  changeSlide(0);
+  activeDot(0);
+};
+init();
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = slides.length - 1;
+  } else {
+    curSlide--;
+  }
+  changeSlide(curSlide);
+  activeDot(curSlide);
+};
+const nextSlide = function () {
+  console.log(curSlide);
+  console.log(`${curSlide === slides.length - 1}`);
+  if (curSlide === slides.length - 1) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+  changeSlide(curSlide);
+  activeDot(curSlide);
+};
+// Event handelers
+sliderBtnLeft.addEventListener('click', prevSlide);
+sliderBtnRight.addEventListener('click', nextSlide);
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') prevSlide();
+  e.key === 'ArrowRight' && nextSlide(); // short circuiting sytax
+});
+dotsContainer.addEventListener('click', function (e) {
+  if (!e.target?.classList.contains('dots__dot')) return;
+  curSlide = +e.target.dataset.slide;
+  // console.log(e.target.dataset); // {slide: '1'}
+  // const { slide } = e.target.dataset;
+  console.log(curSlide);
+  console.log(`${curSlide === slides.length - 1}`);
+  changeSlide(curSlide); // 1
+  activeDot(curSlide);
+});
+
 /* #################################
 section 186 advanced Dom
 ####################################*/
