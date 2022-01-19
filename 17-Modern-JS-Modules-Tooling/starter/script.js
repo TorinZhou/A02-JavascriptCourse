@@ -5,11 +5,9 @@
 // import { addToCart, totalPrice as price, tq } from './shoppingCart.js';
 // addToCart('bread', 5);
 // console.log(price, tq);
-console.log('Importing module');
+
 // import * as ShoppingCart from './shoppingCart.js';
 // ShoppingCart.addToCart('bread', 5);
-import add from './shoppingCart.js';
-// add('pizza', 2);
 
 // const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
 // const data = await res.json();
@@ -51,3 +49,28 @@ import add from './shoppingCart.js';
 // })();
 // ShoppingCart2.addToCart('apple', 5);
 // console.log(ShoppingCart2);
+console.log('Importing module');
+import add from './shoppingCart.js';
+import cloneDeep from 'lodash-es';
+import 'core-js/stable';
+add('pizza', 2);
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+// ES Clone vs lodash DeepClone
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+console.log(stateClone);
+// a little change
+state.user.loggedIn = false;
+console.log(stateClone);
+// get two false.
+console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept();
+}
