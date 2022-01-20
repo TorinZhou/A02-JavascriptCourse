@@ -13,5 +13,9 @@
   "devDependencies": {
     "parcel": "^2.0.0-beta.1",
     "sass": "^1.49.0"
+  },
+  "dependencies": {
+    "core-js": "^3.20.3",
+    "regenerator-runtime": "^0.13.9"
   }
 }
