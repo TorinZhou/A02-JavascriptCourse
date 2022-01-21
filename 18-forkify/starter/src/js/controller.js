@@ -1,3 +1,4 @@
+import * as model from './model.js';
 // import icons from '../img/icons.svg'; // Parcel 1
 import icons from 'url:../img/icons.svg'; // Parcel 2
 import 'core-js/stable';
@@ -30,26 +31,13 @@ const renderSpinner = function (parentEL) {
 
 const showRecipe = async function () {
   try {
-    // loading recipe
+    const id = window.location.hash.slice(1);
+    if (!id) return;
     renderSpinner(recipeContainer);
-    const res = await fetch(
-      // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc13'
-    );
-    const data = await res.json();
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    let { recipe } = data.data;
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      souceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
-    console.log(res, data, recipe);
+    // loading recipe
+    await model.loadRecipe(id); // loadRecipe is an async function, so here we heave to await for it.  One async function calling another async function
+    const { recipe } = model.state;
+
     // rendering recipe
     const markup = `<figure class="recipe__fig">
           <img src="${recipe.image}" alt="${
@@ -154,4 +142,4 @@ const showRecipe = async function () {
     alert(err);
   }
 };
-showRecipe();
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
