@@ -42,20 +42,25 @@ const controlSearchResults = async function () {
     await model.loadSearchResult(query);
 
     // 3) Render results
-    console.log(model.state.search.results);
-    // resultsView.render(model.state.search.results);
-    console.log(model.getSearchResultsPage(1));
-    resultsView.render(model.getSearchResultsPage(4));
+    resultsView.render(model.getSearchResultsPage(1));
 
-    // 4) Render
+    // 4) Render pagination
     paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
+const controlPagination = function (goToPage) {
+  // 1) Render New results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // 2) Render New pagination
+  paginationView.render(model.state.search);
+};
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
 console.log('parcel-hotRelod-test111');
