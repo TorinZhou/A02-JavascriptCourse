@@ -55,4 +55,23 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+  update(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError(); // we have the default message, no need to pass one.
+    this._data = data;
+    const newMarkup = this._generateMarkup();
+    // virtual DOM
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+    console.log(newElements);
+    console.log(curElements);
+    newElements.forEach((newEl, i) => {
+      const curEl = curElements[i];
+      console.log(newEl.isEqualNode(curEl));
+      if (!newEl.isEqualNode(curEl) && newEl.firstChild) {
+        curEl.textContent = newEl.textContent;
+      }
+    });
+  }
 }
