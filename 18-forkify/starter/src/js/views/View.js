@@ -56,8 +56,6 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
   update(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError(); // we have the default message, no need to pass one.
     this._data = data;
     const newMarkup = this._generateMarkup();
     // virtual DOM
