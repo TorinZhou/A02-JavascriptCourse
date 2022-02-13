@@ -20,7 +20,8 @@ const controlRecipes = async function () {
     console.log(id);
     if (!id) return;
     recipeView.renderSpinner();
-
+    // 0> Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
     // 1) loading recipe
     // loadRecipe is an async function, so here we heave to await for it.  One async function calling another async function
     await model.loadRecipe(id);
