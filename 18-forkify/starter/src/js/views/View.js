@@ -47,6 +47,15 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+  /**
+   * Render the recived Obj to the DOM
+   * @param {Object | object[]} data the data to be rendered (e.g. recipe)
+   * @param {boolean} [render=true] if false, creat markup string instead of rendering to the DOM
+   * @returns {undefined | string} A markup is returned if render=false.
+   * @this {object} View instance
+   * @autor Torin Zhou
+   * @todo Finish implementation
+   */
   render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError(); // we have the default message, no need to pass one.
