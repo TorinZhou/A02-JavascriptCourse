@@ -104,3 +104,9 @@ const clearBookmarks = function () {
   localStorage.clear('bookmarks');
 };
 // clearBookmarks();
+export const uploadRecipe = async function (newRecipe) {
+  // console.log(Object.entries(newRecipe));
+  const ingredients = Object.entries(newRecipe).filter(
+    entry => entry[0].startsWith
+  );
+};
