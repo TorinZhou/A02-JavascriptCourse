@@ -67,13 +67,48 @@
 // console.log(new Intl.NumberFormat(navigator.language).format(num));
 // console.log(navigator.language);
 // console.log(navigator.languages);
-var x = 1;
-function foo(y) {
-  return function (z) {
-    return x + y + z;
-  };
-}
 
-var f = foo(2);
+// const list = [1, 2, 3];
+// const square = (num) => {
+//   return new Promise((res, rej) => {
+//     setTimeout(() => res(num * num), 1000);
+//   });
+// };
 
-console.dir(f);
+// const output = async (arr) => {
+//   arr.reduce(async (acc, cur, index, arr) => {
+//     console.log(`current reduce index is ${index}`);
+//     await acc;
+//     console.log(await square(cur));
+//     return square(cur).then((res) => console.log(res));
+//   }, "foo");
+// };
+// output(list);
+
+const fetchJobs = async () => {
+  const locations = ["toronto", "vancouver", "boston"];
+
+  return await locations.reduce(async (previousPromise, location) => {
+    let jobsArray = await previousPromise;
+
+    const jobPostingsCall = await fetch(
+      `https://jobs.github.com/positions.json?description=javascript&location=${location}`
+    );
+
+    const jobPostings = await jobPostingsCall.json();
+
+    jobsArray.push({
+      location,
+      jobPostings,
+    });
+
+    return jobsArray;
+  }, Promise.resolve([]));
+};
+fetchJobs();
+// // forEach() approach: fail
+// const outputBad = async (arr) => {
+//   arr.forEach(async (el, index) => {
+//     console.log(`current reduce index is ${index}`);
+//   });
+// };
